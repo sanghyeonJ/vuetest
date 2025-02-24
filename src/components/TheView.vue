@@ -1,82 +1,35 @@
 <template>
-  <main>
-    <div class="container py-4">
-        <div class="container text-center">
-            <PostCreate @create-post="createPost"/>
-            <div class="row g-4">
+    <main>
+        <div class="container py-4">
+            <MyButton class="buttonClass" id="buttonId" @click="sayHello"/>
+            <!-- 현재 버튼 컴포넌트 내에는 props가 없다 ( 클릭 이벤트가 없음 ) -->
+            <!-- non props 속성은 부모컴포넌트에서 상속된다 -->
 
-                <div class="col col-4" v-for="post in posts" :key="post.id">
-                    <AppCard :title="post.title" :content="post.content" :type="post.type" :is-like="post.isLike" :obj="obj" @toggle-like="post.isLike = !post.isLike"  />
-                    <!-- 속성명이 is-like(케밥케이스) 이면 속성값이 isLike(카멜케이스) 로 들어간다. 속성을 선언할때는 카멜케이스, 사용할때는 케밥케이스 사용을 권장 (공식문서) -->
-                </div>
-            </div>
+            <LabelInput label="이름" data-id="inputId"></LabelInput>
         </div>
-    </div>
-  </main>
+    </main>
 </template>
 
 <script>
-import AppCard from './AppCard.vue'
-import PostCreate from './PostCreate.vue'
-import { reactive } from 'vue'
-
+import MyButton from './MyButton.vue'
+import LabelInput from './LabelInput.vue'
 export default {
-  components: {
-    AppCard,
-    PostCreate
-  },
-  setup(){
-    const obj = reactive({
-        title: '제목2',
-        content: '내용2',
-    })
-    const posts = reactive([
-        {
-            id: 1,
-            title: '제목1',
-            content: '내용1',
-            isLike: true,
-            type: 'news',
-        },
-        {
-            id: 2,
-            title: '제목2',
-            content: '내용2',
-            isLike: false,
-            type: 'notice',
-        },
-        {
-            id: 3,
-            title: '제목3',
-            content: '내용3',
-            isLike: true,
-            type: 'news',
-        },
-        {
-            id: 4,
-            title: '제목4',
-            content: '내용4',
-            isLike: false,
-            type: 'notice',
-        },
-        {
-            id: 5,
-            title: '제목5',
-            content: '내용5',
-            isLike: true,
-            type: 'news',
-        },
-    ])
+    components: {
+        MyButton,
+        LabelInput
+    },
 
-    const createPost = (newTitle) => {
-        console.log(newTitle)
+    setup(){
+
+        const sayHello = () => {
+            alert('hello')
+        }
+        
+
+        return {
+            sayHello
+        }
     }
-    return {
-        obj,
-        posts,
-        createPost
-    }
-  }
 }
 </script>
 
